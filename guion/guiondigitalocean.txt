@@ -31,34 +31,13 @@
   - Destruir instancia existente, y crear otra con la clave SSH
   - Entrar a la maquina via SSH demostrando la ausencia de clave
 --- corte ---
-  - "Bien, hemos visto como gestionar una máquina manualmente, peor el verdadero poder está en la capacidad de escalar estas operaciones
-     en múltiples maquinas. Para ello Digital Ocean cuenta con una API, un conjunto de funciones, que podemos consumir remotamente con
-     un lenguaje de scripting como Python. Esto nos abre la posibilidad de orquestar nuestro rebaño de servidores"
+  - "Bien, hemos visto como gestionar una máquina manualmente, peor el verdadero poder está en la capacidad de
+     escalar estas operaciones en múltiples maquinas. Para ello Digital Ocean cuenta con una API, un conjunto
+     de funciones, que podemos consumir remotamente con un lenguaje de scripting como Python. Esto nos abre la
+     posibilidad de orquestar nuestro rebaño de servidores"
   - Generar una clave efimera para consumir la API
   - pip3 install --user digitalocean-python #TODO: Ver pq no funciona esta mierda
-    PRIMER SCRIPT
-          import digitalocean
-
-          MI_TOKEN="" # Pegar aqui la clave creada
-
-          manager = digitalocean.Manager(token=MI_TOKEN)
-          claves_ssh = manager.get_all_sshkeys()
-
-          maquina1 = digitalocean.Droplet(
-              token=MI_TOKEN,
-              name='maquina1',
-              region='ams3',
-              image='fedora-28-x64',
-              size='s-1vcpu-1gb',
-              ssh_keys=claves_ssh,
-              backups=False
-          )
-          maquina1.create()
+SCRIPT: digitalocean/01_una_maquina.py
   - Volver a la interfaz y ver como la maquina arranca y es mostrada, copiar la IP y hacer SSH
-    SEGUNDO SCRIPT
-        import digitalocean
-
-        MI_TOKEN = "" # Pegar aqui la clave creada
-        SERVIDORES = 5 # Numero de servidores a crear
-
+SCRIPT: digitalocean/02_multiples_maquinas.py
 
