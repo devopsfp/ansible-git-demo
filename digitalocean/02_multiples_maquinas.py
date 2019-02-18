@@ -1,3 +1,4 @@
+import os
 import digitalocean
 
 # Guardamos el valor de la variable de entorno MI_TOKEN para acceder a la API
