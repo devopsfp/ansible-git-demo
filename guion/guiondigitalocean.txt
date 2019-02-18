@@ -31,13 +31,26 @@
   - Destruir instancia existente, y crear otra con la clave SSH
   - Entrar a la maquina via SSH demostrando la ausencia de clave
 --- corte ---
-  - "Bien, hemos visto como gestionar una máquina manualmente, peor el verdadero poder está en la capacidad de
+  - "Bien, hemos visto como gestionar una máquina manualmente, pero el verdadero poder está en la capacidad de
      escalar estas operaciones en múltiples maquinas. Para ello Digital Ocean cuenta con una API, un conjunto
      de funciones, que podemos consumir remotamente con un lenguaje de scripting como Python. Esto nos abre la
      posibilidad de orquestar nuestro rebaño de servidores"
   - Generar una clave efimera para consumir la API
-  - pip3 install --user digitalocean-python #TODO: Ver pq no funciona esta mierda
+  - pip3 install --user python-digitalocean
 SCRIPT: digitalocean/01_una_maquina.py
   - Volver a la interfaz y ver como la maquina arranca y es mostrada, copiar la IP y hacer SSH
+  - Destruir la maquina
+-- corte ---
+  - "Usar la API para crear una máquina individual no tiene mucha utilidad, sin embargo, cuando queremos crear
+     multiples instancias podemos usar un bucle y crear un conjunto"
 SCRIPT: digitalocean/02_multiples_maquinas.py
 
+SCRIPT: digitalocean/03_destruir_antes_de_crear.py
+
+-- Balanceador de carga --
+ESTA PARTE HAY QUE DARLA TRAS LA PRESENTACION DE OLIVER
+
+Temas a comentar por encima:
+- Imagenes propias del SO
+- Base de datos gestionadas
+- Almacenamiento como servicio
