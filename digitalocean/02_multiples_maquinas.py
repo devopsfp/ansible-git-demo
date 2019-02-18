@@ -1,6 +1,8 @@
 import digitalocean
 
-MI_TOKEN = "" # Pegar aqui la clave creada
+# Guardamos el valor de la variable de entorno MI_TOKEN para acceder a la API
+MI_TOKEN = os.environ["MI_TOKEN"]
+
 REPLICAS = 5  # Numero de maquinas a crear
 
 # Gestor global para acciones generales como listar maquinas o claves SSH
