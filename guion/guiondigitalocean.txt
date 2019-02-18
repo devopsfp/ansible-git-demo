@@ -1,0 +1,64 @@
+- guion -
+-- prerequisitos --
+  - Máquina virtual Fedora 29 con un usuario 'lucas' con el icono del avión en las nubes (skywalker, pq va por las nubes)
+    para no interferir con ficheros y directorios existentes, tener prompts al navegar con la consola de comandos.
+  - El usuario al empezar esta demo no puede tener una clave ssh ya generada.
+  - Instalar extensión "hide clock" para que los videos no tengan incongruencias
+  - Usar Firefox para las demos
+  - El usuario al empezar la demo debe estar "logueado" en su cliente de correo y en digitalocean.
+  - Instalar VSCode con flatpak (flatpak install flathub com.visualstudio.code),
+    seleccionar tamaño de fuente 17
+  - gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 600 (10 minutos de screencast con Ctrl Alt Shift R)
+
+- Digital Ocean -
+  - Vista general de la interfaz
+  - Crear una maquina (sin clave SSH)
+    - Explicar el catalogo de maquinas y sistemas operativos
+    - Explicar que el SO viene instalado y listo para usar, que dejamos atrás el tiempo de hacer
+      click en el asistente de instalación del SO
+  - Observar el proceso de aprovisionamiento
+  - Entrar en la maquina desde la interfaz
+  - Entrar en el correo y copiar la contraseña
+  - Explicar inconveniencia e implicaciones de seguridad
+    de usar contraseñas en entornos escalables/automatizados.
+--- corte ---
+  - Crear una clave SSH
+     -- ssh-keygen (usar un nombre especial haria necesario usar .ssh/config y no queremos entrar hasta ahí)
+  - Copiar la parte publica de la clave en la instancia existente
+  - Entrar en la máquina vía SSH demostrando que no hace falta contraseña
+  - Abrir clave pública en un editor de textos
+  - Añadir clave SSH al llavero de DigitalOcean manualmente
+  - Destruir instancia existente, y crear otra con la clave SSH
+  - Entrar a la maquina via SSH demostrando la ausencia de clave
+--- corte ---
+  - "Bien, hemos visto como gestionar una máquina manualmente, peor el verdadero poder está en la capacidad de escalar estas operaciones
+     en múltiples maquinas. Para ello Digital Ocean cuenta con una API, un conjunto de funciones, que podemos consumir remotamente con
+     un lenguaje de scripting como Python. Esto nos abre la posibilidad de orquestar nuestro rebaño de servidores"
+  - Generar una clave efimera para consumir la API
+  - pip3 install --user digitalocean-python #TODO: Ver pq no funciona esta mierda
+    PRIMER SCRIPT
+          import digitalocean
+
+          MI_TOKEN="" # Pegar aqui la clave creada
+
+          manager = digitalocean.Manager(token=MI_TOKEN)
+          claves_ssh = manager.get_all_sshkeys()
+
+          maquina1 = digitalocean.Droplet(
+              token=MI_TOKEN,
+              name='maquina1',
+              region='ams3',
+              image='fedora-28-x64',
+              size='s-1vcpu-1gb',
+              ssh_keys=claves_ssh,
+              backups=False
+          )
+          maquina1.create()
+  - Volver a la interfaz y ver como la maquina arranca y es mostrada, copiar la IP y hacer SSH
+    SEGUNDO SCRIPT
+        import digitalocean
+
+        MI_TOKEN = "" # Pegar aqui la clave creada
+        SERVIDORES = 5 # Numero de servidores a crear
+
+
