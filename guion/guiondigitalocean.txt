@@ -17,7 +17,6 @@
     - Explicar que el SO viene instalado y listo para usar, que dejamos atrás el tiempo de hacer
       click en el asistente de instalación del SO
   - Observar el proceso de aprovisionamiento
-  - Entrar en la maquina desde la interfaz
   - Entrar en el correo y copiar la contraseña
   - Explicar inconveniencia e implicaciones de seguridad
     de usar contraseñas en entornos escalables/automatizados.
@@ -36,7 +35,11 @@
      de funciones, que podemos consumir remotamente con un lenguaje de scripting como Python. Esto nos abre la
      posibilidad de orquestar nuestro rebaño de servidores"
   - Generar una clave efimera para consumir la API
+  - exportar variable de entorno MI_TOKEN en la consola
   - pip3 install --user python-digitalocean
+SCRIPT: digitalocean/99_destruir_maquinas.py
+  - Arrancar una maquina y imprimir lista por pantalla, luego arrancar otra y repetir
+  - Usar un for para iterar sobre la lista y destruir todas las maquinas arrancadas
 SCRIPT: digitalocean/01_una_maquina.py
   - Volver a la interfaz y ver como la maquina arranca y es mostrada, copiar la IP y hacer SSH
   - Destruir la maquina
@@ -44,13 +47,13 @@ SCRIPT: digitalocean/01_una_maquina.py
   - "Usar la API para crear una máquina individual no tiene mucha utilidad, sin embargo, cuando queremos crear
      multiples instancias podemos usar un bucle y crear un conjunto"
 SCRIPT: digitalocean/02_multiples_maquinas.py
-
+  - "Para no acumular maquinas nuevas, destruimos las que tenemos"
 SCRIPT: digitalocean/03_destruir_antes_de_crear.py
+SCRIPT: digitalocean/04_crear_fichero_inventario.py
 
 -- Balanceador de carga --
-ESTA PARTE HAY QUE DARLA TRAS LA PRESENTACION DE OLIVER
-
-Temas a comentar por encima:
+TODO
+-- Temas a comentar por encima -
 - Imagenes propias del SO
 - Base de datos gestionadas
 - Almacenamiento como servicio
