@@ -1,0 +1,8 @@
+---
+- hosts: webservers
+  remote_user: root
+  tasks:
+  - name: Asegurar que la máquina está activa
+    ping:
+  - name: Asegurar que apache se está ejecutando
+    service: name=httpd state=started

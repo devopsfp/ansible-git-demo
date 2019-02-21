@@ -1,0 +1,17 @@
+---
+- hosts: webservers
+  vars:
+    servername: inventory_hostname
+    documentroot: /srv/website
+  remote_user: root
+  tasks:
+  - name: Asegurar que apache está instalado y actualizado en {{ inventory_hostname }}
+    dnf: update_cache=yes cache_valid_time=3600 pkg=httpd state=latest
+    notify:
+    - Reiniciar apache
+  - name: Asegurar que apache se está ejecutando
+    service: name=httpd state=started
+  - name: 
+  handlers:
+    - name: Reiniciar apache
+      service: name=httpd state=restarted

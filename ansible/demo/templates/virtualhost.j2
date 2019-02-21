@@ -1,0 +1,13 @@
+NameVirtualHost *:80
+
+<VirtualHost *:80>
+  ServerName {{ inventory_hostname }}
+  DocumentRoot {{ documentroot }}
+
+  <Directory "{{ documentroot }}">
+    AllowOverride All
+    Options -Indexes FollowSymLinks
+    Order allow,deny
+    Allow from all
+  </Directory>
+</VirtualHost>

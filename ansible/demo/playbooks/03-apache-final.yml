@@ -1,0 +1,33 @@
+---
+- hosts: webservers
+  vars:
+    documentroot: /srv/website
+  remote_user: root
+  tasks:
+  - name: Asegurar que apache está instalado y actualizado en {{ inventory_hostname }}
+    dnf: update_cache=yes cache_valid_time=3600 pkg=httpd state=latest
+  - name: Escribir configuración de virtualhost de apache
+    template: src=templates/virtualhost.j2 dest=/etc/apache/sites-available/virtualhost.conf
+  - name: Activar virtualhost en apache
+    file:
+      src: /etc/apache/sites-available/virtualhost.conf
+      dest: /etc/apache/sites-enabled/virtualhost.conf
+      state: link
+  - name: Crear directorio del contenido web
+    /srv/website
+  - name: Copiar contenido de la web a {{ documentroot }} en  {{ inventory_hostname }}
+    copy:
+      src: website/index.php
+      dest: /srv/website/index.php
+      owner: www-data
+      group: www-data
+      mode: 0644
+    notify:
+    - Reiniciar apache
+  - name: Asegurar que apache se está ejecutando
+    service: name=httpd state=started
+  - name: 
+  handlers:
+    - name: Reiniciar apache
+      service: name=httpd state=restarted
+
