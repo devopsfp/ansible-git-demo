@@ -42,17 +42,49 @@
 
 ## Videos
 
-* Ejecución de un comando en máquina remota
-* Ejecución de un módulo ansible en máquina remota
+* Instalación de ansible (sudo pip install ansible)
+* Ejecución de ansible en la máquina local
+  * Ejecución de un comando en máquina local
+  * Ejecución de un módulo ansible en máquina local
+* Ejecución de ansible en máquinas remotas
+  * Crear una máquina nueva en DigitalOcean
+  * Crear un inventario con la nueva máquina
+    * maquina1 ansible_host=104.248.87.200 ansible_user=root ansible_python_interpreter=python3
+  * Ejecutar un comando en máquina remota
+    * ansible -i inventario -a "uname -a" maquina1
+  * Ejecutar un módulo de ansible en máquina remota
+    * ansible -i inventario -m ping maquina1
 * Creación de un playbook simple
-* Ejecución del playbook en máquina remota
-* Lectura de la salida
-* Introducción de error deliberado
-* Ejecución del playbook en máquina remota
-* Lectura de la salida
+  * Añadir al playbook el módulo ping
+  * Ejecución del playbook en máquina remota
+  * Lectura de la salida
+  * Introducción de error deliberado
+    * Intentar iniciar un servicio que no está instalado
+  * Ejecución del playbook en máquina remota
+  * Lectura de la salida
 * Creación de un playbook para desplegar servidor web
-* Ejecución del playbook en máquina remota
+  * Instalación del paquete de Apache
+  * Ejecutar el playbook
+  * Lectura de la salida
+  * Activación del servicio de Apache
+  * Ejecutar el playbook
+  * Lectura de la salida
+    * Recalcar que la instalación del paquete ya estaba hecha
+  * Comprobar que el servidor web está activo
+* Añadir contenido al servidor web
+  * Editar fichero PHP <?php phpinfo(); ?>
+  * Añadir al playbook la copia de la configuración
+  * Añadir al playbook la copia del contenido
+  * Ejecutar playbook
+  * El servidor no mostrará el fichero PHP porque no tenemos PHP instalado
+* Instalar PHP en el servidor
+  * Añadir al playbook instalación de paquete php
+  * Modificar activación de Apache para que reinicie el servicio
+  * Ejecutar playbook
+  * El servidor web mostrará el fichero PHP
+
 * Ejecución de playbook en el inventario generado por el script de dígital ocean de Alberto
-* Lectura de la salida
-* Comprobación de los distintos servidores
-* Paso la parte de balanceador de carga
+  * Generar un inventario con el script de creación de varias máquinas
+  * Ejecutar playbook del servidor web en dicho inventario
+  * Lectura de la salida
+  * Comprobación de los distintos servidores
